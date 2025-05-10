@@ -2,34 +2,37 @@ package entities;
 import Interfaces.Customer;
 import Interfaces.Administrator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class ECommerceSystem implements Administrator, Customer {
     private Scanner scanner = new Scanner(System.in); //available to all methods  of the class
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
     private Cart cart = new Cart();
 
     public ECommerceSystem(List<Product> products) {
         this.products = products;
-        stubdata();
+//        stubdata();
 
     }
 
-    private void stubdata() {
-        //elctronics inventory
-        products.add(new Electronics());
-        products.add(new Electronics());
-        products.add(new Electronics());
-        products.add(new Electronics());
-        products.add(new Electronics());
+    private static final List<Electronics> inventory = new ArrayList<>();
 
-        //books inventory
-        //clothing inventory
-        //self-care inventory
-        //events inventory
-    }
+//    private void stubdata() {
+//        //electronics inventory
+//        products.add(new Electronics());
+//        products.add(new Electronics());
+//        products.add(new Electronics());
+//        products.add(new Electronics());
+//        products.add(new Electronics());
+//
+//        //books inventory
+//        //clothing inventory
+//        //self-care inventory
+//        //events inventory
+//    }
 
 
 
@@ -58,19 +61,22 @@ public class ECommerceSystem implements Administrator, Customer {
                     break;
 
                 case 2:
-                    System.out.print("Choose product to edit by Id");
+                    System.out.println("Choose product to edit by Id");
                     int productId = scanner.nextInt();
+                    scanner.nextLine();
                     Optional<Product> productById = findProductById(productId);
                     if (productById.isPresent()) {
                         System.out.println(productById.get().displayDetails());
                         productById.get().displayEditProductMenu(scanner);
-
+                    } else {
+                        System.out.println("Product not found");
                     }
                     break;
 
                 case 3:
                     System.out.print("Choose product to remove by Id");
                     int removeProductId = scanner.nextInt();
+                    scanner.nextLine();
                     removeProduct(removeProductId);
                     break;
 
@@ -110,7 +116,7 @@ public class ECommerceSystem implements Administrator, Customer {
 
             switch (option) {
                 case 1:
-                    browseProducts();
+                    Product.displayBrowseProductMenu(scanner, products);
                     break;
 
                 case 2:

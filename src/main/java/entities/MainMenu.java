@@ -8,12 +8,28 @@ import Interfaces.Customer;
 
 
 public class MainMenu {
-    
+
+    private static List<Product> products = new ArrayList<>();
+
+    static {
+        seedInventory();
+    }
+
+    public static void seedInventory() {
+        products.clear();
+        products.add(new Electronics(1, "MacBook Pro", "Laptop", "Apple", 12, 1799));
+        products.add(new Electronics(2, "Dell Monitor", "4k Ultra HD Monitor", "Dell", 18, 299));
+        products.add(new Electronics(3, "LT Mouse", "Wireless and Ergonomic build", "Logitech ", 12, 39));
+        products.add(new Electronics(4, "LT Mechanical Keyboard", "RGB and wireless", "Logitech", 12, 49));
+        products.add(new Electronics(5, "JBL Bluetooth Speaker", "Wonderboom X portable waterproof speaker", "JBL", 24, 79));
+    }
+
     public static void main (String[] args) {
         Scanner scanner = new Scanner(System.in);           //set up input(user) and data
-        List<Product> products = new ArrayList<>();         //initialise empty list of products
 
-        //interface-based references/methods
+
+        //interface-based references/methods1
+
         Administrator administratorInterface =  new ECommerceSystem(products);
         Customer customerInterface = new ECommerceSystem(products);
 

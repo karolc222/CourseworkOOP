@@ -1,35 +1,29 @@
 package entities;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
 
 import java.util.Scanner;
 
 public class Electronics extends Product {
+
     private String productBrand;
     private int productWarranty;
 
+    public Electronics (int productId, String productName, String productDescription, String productBrand, int productWarranty, int productPrice) {
+        super(productId, productName, productDescription, productPrice);
+        this.productBrand = productBrand;
+        this.productWarranty = productWarranty;
+        this.productCategory = "Electronics";
+    }
 
-    public Electronics () {
-        
-        //constructor method called  when a new object is created   
-        int id = 0;
-        String name = "";
-        int price = 0;
-        String category = "";
-        String brand = "";
-        int warranty = 0;
-        String description = "";
-
-
-        this.productId = id;
-            this.productName  = name;  
-            this.productCategory = category;
-            this.productDescription = description;
-            this.productPrice = price;
-            this.productBrand = brand;
-            this.productWarranty = warranty;
+    public Electronics() {
+        this.productCategory = "Electronics";
     }
 
 
-    @Override
+    @Override //Product class
     public String displayDetails() {
         return "Electronics: " + productName
                 + " by " + productBrand
@@ -38,28 +32,24 @@ public class Electronics extends Product {
     }
 
     @Override
-    protected void displayCreateProductMenu(Scanner scanner) {
+    protected void displayCategoryMenu(Scanner scanner) {
+        displayCreateProductMenu(scanner);
+
         System.out.println("Set warranty period (in months): ");
-       this.productWarranty = Integer.parseInt(scanner.nextLine());
+        this.productWarranty = Integer.parseInt(scanner.nextLine());
         System.out.println("You set the warranty: " + this.productWarranty + "months");
 
 
         System.out.println("Enter product brand: ");
         this.productBrand = scanner.nextLine();
         System.out.println("The brand of this product is" + this.productBrand);
+
     }
 
-
-    @Override
-    protected void displayCategoryMenu(Scanner scanner) {
-        this.displayCreateProductMenu(scanner);
-        System.out.println("Enter product brand: ");
-        this.productBrand = scanner.nextLine();
-        
-    }
+}
 
 
     
-}
+
 
 
