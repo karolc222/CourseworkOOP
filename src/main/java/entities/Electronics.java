@@ -1,18 +1,12 @@
 package entities;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-
-
 import java.util.Scanner;
 
 public class Electronics extends Product {
-
     private String productBrand;
     private int productWarranty;
 
-    public Electronics (int productId, String productName, String productDescription, String productBrand, int productWarranty, int productPrice) {
-        super(productId, productName, productDescription, productPrice);
+    public Electronics (String productName, String productDescription, String productBrand, int productWarranty, double productPrice) {
+        super(productName, productDescription, productPrice);
         this.productBrand = productBrand;
         this.productWarranty = productWarranty;
         this.productCategory = "Electronics";
@@ -23,12 +17,12 @@ public class Electronics extends Product {
     }
 
 
-    @Override //Product class
+    @Override //from Product class
     public String displayDetails() {
         return "Electronics: " + productName
                 + " by " + productBrand
-                + " (" + productWarranty + " months warranty) - £"
-                + productPrice;
+                + " (" + productWarranty + " months warranty) " +
+                "£" + productPrice;
     }
 
     @Override
@@ -45,7 +39,6 @@ public class Electronics extends Product {
         System.out.println("The brand of this product is" + this.productBrand);
 
     }
-
 }
 
 

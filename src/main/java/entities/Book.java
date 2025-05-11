@@ -3,37 +3,41 @@ package entities;
 import java.util.Scanner;
 
 public class Book extends Product {
-    private String author;
-    private String publisher;
+    private String productAuthor;
+    private String productPublisher;
 
 
 
-    public Book(int id, String name, String author, String publisher, String category, String description, double price) {
+    public Book(String productName, String productDescription, String productAuthor, String productPublisher, double productPrice) {
+        super(productName, productDescription, productPrice);
+        this.productAuthor = productAuthor;
+        this.productPublisher = productPublisher;
+        this.productCategory = "Book";
+    }
 
-        //constructor method called  when a new object is created
-        this.productId = id;
-        this.productName  = name;
-        this.author = author;
-        this.publisher = publisher;
-        this.productCategory = category;
-        this.productDescription = description;
-        this.productPrice = price;
+    public Book() {
+        this.productCategory = "Book";
     }
 
     @Override
     public String displayDetails() {
-        return "Book: " + productName + " by " + author + " (" + publisher + ") - £" + productPrice;
+        return "Book: ID [" + productId + "] "
+                + productName
+                + " by " + productAuthor
+                + " (" + productPublisher + ") - £" + productPrice;
     }
 
     @Override
     protected void displayCategoryMenu(Scanner scanner) {
         this.displayCreateProductMenu(scanner);
+
         System.out.println("Enter book author: ");
-        this.author = scanner.nextLine();
+        this.productAuthor = scanner.nextLine();
+        System.out.println("You set the product author: " + productAuthor);
+
         System.out.println("Enter book publisher: ");
-        this.publisher = scanner.nextLine();
+        this.productPublisher = scanner.nextLine();
+        System.out.println("You set the book publisher as: " + productPublisher);
 
     }
-
-
 }

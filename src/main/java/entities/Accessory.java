@@ -2,46 +2,43 @@ package entities;
 import java.util.Scanner;
 
 public class Accessory extends Product {
-    private String productColour;
-    private String productStyle;
+    private String productType;
     private String productBrand;
 
 
-    public Accessory(int id, String name, String brand, String style, String colour, String category, String description, double price) {
 
-        //constructor method called  when a new object is created
-        this.productId = id;
-        this.productName  = name;
-        this.productColour = colour;
-        this.productStyle = style;
-        this.productBrand = brand;
-        this.productCategory = category;
-        this.productDescription = description;
-        this.productPrice = price;
 
+    public Accessory (String productName, String productType, String productBrand, String productDescription, double productPrice) {
+        super(productName, productDescription, productPrice);
+        this.productType = productType;
+        this.productBrand = productBrand;
+        this.productCategory = "Accessory";
     }
+
+    public Accessory() {
+        this.productCategory = "Accessory";
+    }
+
 
     @Override
     public String displayDetails() {
-        return "Accessory: " + productName + " by " + productBrand + " (" + productStyle + ", Colour: " + productColour + ") - £" + productPrice;    }
+        return "Accessory: ID [" + productId + "] " + productName
+                + " by " + productBrand
+                + " (" + productType
+                + ") - £" + productPrice;
+    }
 
     @Override
     protected void displayCategoryMenu(Scanner scanner) {
         this.displayCreateProductMenu(scanner);
-        System.out.println("Enter accessory style type: ");
-        this.productStyle = scanner.nextLine();
 
-        System.out.println("Enter accessory colour: ");
-        this.productColour = scanner.nextLine();
+        System.out.println("Enter accessory type: (bag, watch or headpiece");
+        this.productType = scanner.nextLine();
+        System.out.println("You set the accessory type: " + productType);
 
         System.out.println("Enter accessory brand: ");
         this.productBrand = scanner.nextLine();
-
-        System.out.println("Enter accessory category: ");
-        this.productCategory = scanner.nextLine();
+        System.out.println("You set the accessory brand: " + productBrand);
 
     }
-
-
-
 }

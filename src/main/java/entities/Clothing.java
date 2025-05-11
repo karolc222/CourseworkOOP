@@ -1,75 +1,58 @@
 package entities;
-
 import java.util.Scanner;
 
 public class Clothing extends Product {
 
     private String productBrand;
-    private String size;
-    private String colour;
+    private char productSize;
+    private String productColour;
 
 
-
-    public Clothing(int productId, String productName, String productBrand, String productDescription, String productSize, String productColour, double productPrice) {
-        //constructor method called  when a new object is created
-        super(productId, productName, productDescription, productPrice);
-
+    public Clothing(String productName, String productBrand, String productDescription, char productSize, String productColour, double productPrice) {
+        super(productName, productDescription, productPrice);
         this.productBrand = productBrand;
+        this.productSize = productSize;
+        this.productColour = productColour;
         this.productCategory = "Clothing";
     }
 
-    public String getSize() {
-        return size;
+    public Clothing() {
+        this.productCategory = "Clothing";
     }
 
-    public void setSize(String size) {
-        this.size = size;
-    }
 
-    public String getColour() {
-        return colour;
-    }
-
-    public void setColour(String colour) {
-        this.colour = colour;
-    }
-
-    @Override //Product class
+    @Override
     public String displayDetails() {
-        return "Clothing: {" + productName + " (" + productBrand + ") - £" + productPrice;    }
+        return "Clothing: ID [" + productId + "] " + productName
+                + ", in " + productColour
+                + ", size: " + productSize
+                + " by " + productBrand
+                + " £ " + productPrice;
+    }
+
 
     @Override
     protected void displayCategoryMenu(Scanner scanner) {
-//        displayCreateProductMenu(scanner);
-//
-//        System.out.println("Set warranty period (in months): ");
-//        this.productWarranty = Integer.parseInt(scanner.nextLine());
-//        System.out.println("You set the warranty: " + this.productWarranty + "months");
-//
-//
-//        System.out.println("Enter product brand: ");
-//        this.productBrand = scanner.nextLine();
-//        System.out.println("The brand of this product is" + this.productBrand);
+        displayCreateProductMenu(scanner);
+
+        System.out.println("Enter product brand: ");
+        this.productBrand = scanner.nextLine();
+        System.out.println("The brand of this product is" + this.productBrand);
+
+        System.out.println("Select size: S/M/L");
+        String sizeInput = scanner.next();
+        this.productSize = sizeInput.charAt(0);
+        System.out.println("Selected size: " + this.productSize);
+        
+        System.out.println("Select product colour:");
+        this.productColour = scanner.nextLine();
+        System.out.println("The product colour is" + this.productColour);
+        
+
 
     }
 
-
-//    @Override
-//    protected void displaySpecificEditMenu (Scanner scanner) {
-//        System.out.println("Select size: S/M/L");
-//        this.size = scanner.nextLine();
-//        System.out.println("Selected size: " + this.size);
-//
-//        System.out.println("Select colour: S/M/L");
-//        this.colour = scanner.nextLine();
-//        System.out.println("Selected colour: " + this.colour);
-//
-//
-//    }
-
-
-
-
 }
+
 
 

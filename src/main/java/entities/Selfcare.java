@@ -1,29 +1,29 @@
 package entities;
-
 import java.util.Scanner;
 
-
 public class Selfcare extends Product {
-    private String brand;
-    private String type;
+    private String productBrand;
+    private String productType;
 
 
 
-    public Selfcare (int id, String name, String brand, String type, String category, String description, double price) {
+    public Selfcare (String productName, String productDescription, String productBrand, String productType, double productPrice) {
+        super(productName, productDescription, productPrice);
+        this.productBrand = productBrand;
+        this.productType = productType;
+        this.productCategory = "Selfcare";
+    }
 
-        //constructor method called  when a new object is created
-        this.productId = id;
-        this.productName  = name;
-        this.brand = brand;
-        this.type = type;
-        this.productCategory = category;
-        this.productDescription = description;
-        this.productPrice = price;
+    public Selfcare() {
+        this.productCategory = "Selfcare";
     }
 
     @Override
     public String displayDetails() {
-        return "Selfcare: " + productName + " by " + brand + " (" + type + ") - £" + productPrice;
+        return "Selfcare: ID [" + productId + "] " + productName
+                + " by " + productBrand
+                + " (" + productType + ") - £"
+                + productPrice;
     }
 
     @Override
@@ -31,10 +31,12 @@ public class Selfcare extends Product {
         this.displayCreateProductMenu(scanner);
 
         System.out.println("Enter product type: ");
-        this.type = scanner.nextLine();
+        this.productType = scanner.nextLine();
+        System.out.println("You entered: " + productType);
 
         System.out.println("Enter product brand: ");
-        this.brand = scanner.nextLine();
+        this.productBrand = scanner.nextLine();
+        System.out.println("You entered: " + productBrand);
 
     }
 

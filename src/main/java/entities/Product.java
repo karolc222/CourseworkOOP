@@ -5,7 +5,9 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+
 public abstract class Product {
+    protected static int nextId = 1;
     protected int productId;
     protected String productName;
     protected String productDescription;
@@ -14,17 +16,18 @@ public abstract class Product {
 
     public Product() {}
 
-    public Product(int productId, String productName, String productDescription, double productPrice) {
-        this.productId = productId;
+    //constructor to initialise id, name description and price
+    public Product( String productName, String productDescription, double productPrice) {
+        this.productId = nextId++;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
     }
 
-    //abstract method to be implemented by subclasses
+    //Abstract method to be implemented by subclasses
     public abstract String displayDetails();
 
-    //getters
+    //getters to read product data
     public int getProductId() {
         return productId;
     }
@@ -46,7 +49,7 @@ public abstract class Product {
     }
 
 
-    //setters
+    //setters to update product data
     public void setProductId(int productId) {
         this.productId = productId;
     }
@@ -68,7 +71,7 @@ public abstract class Product {
     }
 
 
-    //method for creating new Product, shared by all subclasses
+    //Method for creating new Products used by all subclasses
     protected void displayCreateProductMenu(Scanner scanner) {
 
         System.out.println("Enter product name: ");
@@ -87,7 +90,6 @@ public abstract class Product {
         System.out.println("Enter product category: ");
         this.productCategory = scanner.nextLine();
         System.out.println("You set the category: " + this.productCategory);
-
     }
 
     //method for editing product information
@@ -121,19 +123,16 @@ public abstract class Product {
             this.productCategory = productCategory;
             System.out.println("You set the category: " + this.productCategory);
         }
-
-        //special fields for different categories
-//        displaySpecificEditMenu(scanner);
     }
 
     protected abstract void displayCategoryMenu(Scanner scanner);
 
 
-    //menu for adding new products
+    //Menu for adding new products
     public static Product displayProductMenu(Scanner scanner) {
 
         Product product = null;
-
+        //Category menu
         boolean productMenuRunning = true;
         while (productMenuRunning) {
             System.out.println("\n--- Choose product category---");
@@ -148,9 +147,10 @@ public abstract class Product {
             int option = scanner.nextInt();
             scanner.nextLine();
 
-            //category menu
+            //Category options menu for product creation
             switch (option) {
                 case 1:
+                    //1.Electronics
                     System.out.println("Creating a new Electronics Product");
                     product = new Electronics();
                     product.displayCategoryMenu(scanner);
@@ -158,27 +158,35 @@ public abstract class Product {
 
 
                 case 2:
+                    //2.Books
                     System.out.println("Creating a new Books Product");
-//                    product = new Book();
+                    product = new Book();
                     product.displayCategoryMenu(scanner);
                     break;
 
                 case 3:
-                    System.out.print("Choose product to remove by Id");
-                    String removeProductId = scanner.nextLine();
-                    //removeProduct(removeProductId);
+                    //3.Clothing
+                    System.out.println("Creating a new Clothing Product");
+                    product = new Clothing();
+                    product.displayCategoryMenu(scanner);
                     break;
 
                 case 4:
-                    System.out.print("Choose category");
+                    //4.Self-care
+                    System.out.println("Creating a new Self-care Product");
+//                  product = new Selfcare();
+                    product.displayCategoryMenu(scanner);
                     break;
 
                 case 5:
-                    System.out.print("Generate sales report");
+                    //5.Accessories
+                    System.out.println("Creating a new Accessory Product");
+//                    product = new Accessory();
+                    product.displayCategoryMenu(scanner);
                     break;
 
                 case 6:
-                    System.out.print("Back to main menu");
+                    System.out.println("Back to main menu");
                     productMenuRunning = false;
                     break;
                 default:
@@ -199,53 +207,55 @@ public abstract class Product {
             System.out.println("2. Books");
             System.out.println("3. Clothing");
             System.out.println("4. Self-care");
-            System.out.println("5. Events");
+            System.out.println("5. Accessories");
             System.out.println("6. Back to Main Menu");
             System.out.println("Choose option");
 
             int option = scanner.nextInt();
             scanner.nextLine();
 
+
             Map<String, List<Product>> productsByCategory = null;
-            //category menu
+
+            //Category menu
             switch (option) {
                 case 1:
-                    System.out.println("Listing all Electronics Product");
+                    System.out.println("Listing all Electronics Products");
                     productsByCategory =
                             products.stream().collect(Collectors.groupingBy(Product::getProductCategory));
                     productsByCategory.get("Electronics").forEach(product -> {System.out.println(product.displayDetails());});
                     break;
 
                 case 2:
-                    System.out.println("Listing all Electronics Product");
+                    System.out.println("Listing all Book Products");
                     productsByCategory =
                             products.stream().collect(Collectors.groupingBy(Product::getProductCategory));
-                    productsByCategory.get("Electronics").forEach(product -> {System.out.println(product.displayDetails());});
+                    productsByCategory.get("Book").forEach(product -> {System.out.println(product.displayDetails());});
                     break;
 
                 case 3:
-                    System.out.println("Listing all Electronics Product");
+                    System.out.println("Listing all Clothing Products");
                     productsByCategory =
                             products.stream().collect(Collectors.groupingBy(Product::getProductCategory));
-                    productsByCategory.get("Electronics").forEach(product -> {System.out.println(product.displayDetails());});
+                    productsByCategory.get("Clothing").forEach(product -> {System.out.println(product.displayDetails());});
                     break;
 
                 case 4:
-                    System.out.println("Listing all Electronics Product");
+                    System.out.println("Listing all Self-care Products");
                     productsByCategory =
                             products.stream().collect(Collectors.groupingBy(Product::getProductCategory));
-                    productsByCategory.get("Electronics").forEach(product -> {System.out.println(product.displayDetails());});
+                    productsByCategory.get("Selfcare").forEach(product -> {System.out.println(product.displayDetails());});
                     break;
 
                 case 5:
-                    System.out.println("Listing all Electronics Product");
+                    System.out.println("Listing all Accessory Products");
                     productsByCategory =
                             products.stream().collect(Collectors.groupingBy(Product::getProductCategory));
-                    productsByCategory.get("Electronics").forEach(product -> {System.out.println(product.displayDetails());});
+                    productsByCategory.get("Accessory").forEach(product -> {System.out.println(product.displayDetails());});
                     break;
 
                 case 6:
-                    System.out.print("Back to main menu");
+                    System.out.println("Back to main menu");
                     productMenuRunning = false;
                     break;
                 default:
